@@ -43,7 +43,9 @@ perform_scheduled_backup() {
 {% if pre %}
     /etc/duplicity/pre || exit 1
 {% endif %}
+{% if remove_older_than %}
     duplicity remove-older-than {{ remove_older_than }} --force $all_options $TARGET || exit 1
+{% endif %}
 {% if remove_all_inc_of_but_n_full %}
     # For the following command we add --verbosity=error at the end,
     # which overrides whatever verbosity has been set; this is because
