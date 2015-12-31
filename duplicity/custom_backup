@@ -26,6 +26,8 @@ EOF1
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 PASSPHRASE='{{ gpg_pw }}'
 FTP_PASSWORD={{ target_pw }}
+AWS_ACCESS_KEY_ID='{{ aws_key }}'
+AWS_SECRET_ACCESS_KEY='{{ aws_secret }}'
 TARGET={{ target }}
 VERBOSITY={{ verbosity }}
 GPG_OPTIONS="{% if not key_id %}--no-encryption{% elif key_id != 'symmetric' %}--encrypt-key={{ key_id }}{% endif %}"
@@ -35,7 +37,7 @@ EXTRA_PARMS="{{ extra_parms.replace('"', '\\"') }}"
 
 all_options="$GPG_OPTIONS --verbosity=$VERBOSITY $ASKPASS \
             --archive-dir=/var/cache/duplicity $EXTRA_PARMS"
-export PASSPHRASE FTP_PASSWORD
+export PASSPHRASE FTP_PASSWORD AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
 
 perform_scheduled_backup() {
     cd / # Pre/post scripts may contain "su postgres ...", which shows an error

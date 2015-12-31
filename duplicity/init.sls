@@ -52,6 +52,8 @@ python-gobject:
     - defaults:
         gpg_pw: {{ pillar.duplicity.get('gpg_pw', '') }}
         target_pw: {{ pillar.duplicity.get('target_pw', '') }}
+        aws_key: {{ pillar.duplicity.get('aws_key', '') }}
+        aws_secret: {{ pillar.duplicity.get('aws_secret', '') }}
         target: {{ pillar.duplicity.target }}
         verbosity: {{ pillar.duplicity.get('verbosity', 4) }}
         key_id: {{ key_id }}
