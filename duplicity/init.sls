@@ -20,8 +20,8 @@ trust_public_gpg_key:
     - unless: "gpg --export-ownertrust|grep {{ key_fingerprint }}|grep -q :6:"
     - require:
       - cmd.run: import_public_gpg_key
-{% elif pillar.duplicity.get('gpg_key_id', False) %}
-{% set key_id = pillar.duplicity.gpg_key_id %}
+{% else %}
+{% set key_id = pillar.duplicity.get('gpg_key_id', False) %}
 {% endif %}
 
 duplicity:
