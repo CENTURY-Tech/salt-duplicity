@@ -24,6 +24,19 @@ trust_public_gpg_key:
 {% set key_id = pillar.duplicity.get('gpg_key_id', False) %}
 {% endif %}
 
+duplicity_ppa_repo:
+  pkgrepo:
+    {%- if pillar.duplicity.get('install_from_ppa', False) %}
+    - managed
+    {%- else %}
+    - absent
+    {%- endif %}
+    - ppa: duplicity-team/ppa
+    - require_in:
+      - pkg: duplicity
+    - watch_in:
+      - pkg: duplicity
+
 duplicity:
   pkg:
     - installed
