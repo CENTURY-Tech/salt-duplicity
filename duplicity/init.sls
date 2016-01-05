@@ -72,8 +72,8 @@ python-gobject:
         key_id: {{ key_id }}
         includes_excludes: {{ pillar.duplicity.get('includes_excludes', '') }}
         extra_parms: {{ pillar.duplicity.get('extra_parms', '') }}
-        pre: {{ pillar.duplicity.get('pre', 'False') }}
-        post: {{ pillar.duplicity.get('post', 'False') }}
+        pre: {{ pillar.duplicity.get('pre', 'False') is defined }}
+        post: {{ pillar.duplicity.get('post', 'False') is defined }}
         remove_older_than: {{ pillar.duplicity.get('remove_older_than', '2Y') }}
         remove_all_inc_of_but_n_full: {{ pillar.duplicity.get('remove_all_inc_of_but_n_full', '') }}
         full_if_older_than: {{ pillar.duplicity.get('full_if_older_than', '1M') }}
