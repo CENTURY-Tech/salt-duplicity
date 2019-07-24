@@ -41,16 +41,6 @@ duplicity:
   pkg:
     - installed
 
-# We install paramiko from pip, because the Debian version has some
-# problems; notably later paramiko versions have improved on
-# https://github.com/paramiko/paramiko/issues/17.
-paramiko:
-  pip.installed:
-    - name: paramiko == 1.12.1
-python-paramiko:
-  pkg:
-    - purged
-
 # This is to avoid the "no module gio" warning
 python-gobject:
   pkg:
@@ -78,7 +68,7 @@ python-gobject:
         remove_all_inc_of_but_n_full: {{ pillar.duplicity.get('remove_all_inc_of_but_n_full', '') }}
         full_if_older_than: {{ pillar.duplicity.get('full_if_older_than', '1M') }}
         source: {{ pillar.duplicity.get('source', '/') }}
-      
+
 {% set when_to_run = pillar.duplicity.get('when_to_run', '0 4 * * *') %}
 /etc/cron.d/duplicity:
   file.managed:
